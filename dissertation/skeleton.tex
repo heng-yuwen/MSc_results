@@ -30,86 +30,29 @@
 \author{Yuwen Heng}
 
 \abstract{
-  This skeleton demonstrates how to use the \texttt{infthesis} style
-  for MSc dissertations in Artificial Intelligence, Cognitive Science,
-  Computer Science, Data Science, and Informatics. It also emphasises
-  the page limit, and that you must not deviate from the required
-  style.  The file \texttt{skeleton.tex} generates this document and
-  can be used as a starting point for your thesis. The abstract should
-  summarise your report and fit in the space on the first page.
-  
-  Training ML/DL models has become a major computational cost in the enterprise given its time-consuming iterative nature and the increasing scale of datasets. A key technique to reduce the cost is to reduce the training datasets via various data reductions techniques (e.g., sampling [1,2]) so that we only train models with a controlled much smaller dataset instead of the original one. However, data reduction inevitably reduces the accuracy of trained models. This project aims to systematically evaluate the impact of different data reductions on the relative accuracy of trained models, both analytically and empirically, and provide a general guideline for us to pick the right data reduction techniques for our learning tasks.
-
+Training deep neural networks can be resources-consuming. The budget required is increasing with the size of the dataset. During the past few decades, many research is dedicated to developing training procedures to accelerate the convergence speed of deep learning. However, we still need the whole dataset to train the network and paying for a large dataset may not pay back well if we can use a smaller subset to achieve an acceptable performance. To solve this issue, we first adapted and evaluated three methods, Patterns by Ordered Projections (POP), Enhanced Global Density-based Instance Selection (EGDIS), and Curriculum Learning (CL), to reduce the size of two image datasets, CIFAR10 and CIFAR100, for the classification task. Based on the analysis, we present our two contributions: the Weighted Curriculum Learning (WCL) and a trade-off framework. The WCL outperforms POP and EGDIS in terms of both classification accuracy and time complexity. It achieves comparable performance compared with CL while keeping a portion of hard examples. The trade-off framework selects a subset of samples according to the acceptable relative accuracy and the dataset. In addition, the framework is also extended to predict the number of samples needed to achieve a particular accuracy with a given subset.
 }
 
 \maketitle
 
 \section*{Acknowledgements}
-Any acknowledgements go here. 
+First and foremost, I would like to express my deepest gratitude to my supervisor, Dr Yang Cao, for offering me the opportunity to work with him on such an attracting and challenging project. His encouragement and valuable guidance helped me tackle the obstacles in my research path. 
 
+Furthermore, special thanks go to Professor Bob Fisher, Dr Pavlos Andreadis at the University of Edinburgh and Dr Jiacheng Ni at IBM for sharing me their knowledge about computer vision and deep learning. The programming skills and coursework experience that I learnt from them helped me to organise the experiments well.
+
+Finally, I would like to send my love to my fiancee Danni Li for her accompany during the past three years . I wouldn't have the chance to study full-time without her full support. 
 \tableofcontents
 \end{preliminary}
 
 
 \chapter{Introduction}
-
-The preliminary material of your report should contain:
-\begin{itemize}
-\item
-The title page.
-\item
-An abstract page.
-\item
-Optionally an acknowledgements page.
-\item
-The table of contents.
-\end{itemize}
-
-As in this example \texttt{skeleton.tex}, the above material should be
-included between:
-\begin{verbatim}
-\begin{preliminary}
-    ...
-\end{preliminary}
-\end{verbatim}
-This style file uses roman numeral page numbers for the preliminary material.
-
-The main content of the dissertation, starting with the first chapter,
-starts with page~1. \emph{\textbf{The main content must not go beyond page~40.}}
-
-The report then contains a bibliography and any appendices, which may go beyond
-page~40. The appendices are only for any supporting material that's important to
-go on record. However, you cannot assume markers of dissertations will read them.
-
-You may not change the dissertation format (e.g., reduce the font
-size, change the margins, or reduce the line spacing from the default
-1.5 spacing). Over length or incorrectly-formatted dissertations will
-not be accepted and you would have to modify your dissertation and
-resubmit.  You cannot assume we will check your submission before the
-final deadline and if it requires resubmission after the deadline to
-conform to the page and style requirements you will be subject to the
-usual late penalties based on your final submission time.
-
-\section{Using Sections}
-
-Divide your chapters into sub-parts as appropriate.
-
-\section{Citations}
-
-Citations (such as \cite{P1} or \cite{P2}) can be generated using
-\texttt{BibTeX}. For more advanced usage, the \texttt{natbib} package is
-recommended. You could also consider the newer \texttt{biblatex} system.
-
-These examples use a numerical citation style. You may also use
-(Author, Date) format if you prefer.
+\subfile{cp1-introduction.tex}
 
 \chapter{Your next chapter}
 
 A dissertation usually contains several chapters.
 
 \chapter{Conclusions}
-
-\include{Exp1}
 
 \section{Final Reminder}
 

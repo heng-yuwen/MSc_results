@@ -1,8 +1,5 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}% 
-\contentsline {section}{\numberline {1.1}Using Sections}{2}% 
-\contentsline {section}{\numberline {1.2}Citations}{2}% 
-\contentsline {chapter}{\numberline {2}Your next chapter}{3}% 
-\contentsline {chapter}{\numberline {3}Conclusions}{4}% 
-\contentsline {chapter}{\numberline {4}New file}{5}% 
-\contentsline {section}{\numberline {4.1}Final Reminder}{6}% 
-\contentsline {chapter}{Bibliography}{7}% 
+\contentsline {chapter}{\numberline {2}Your next chapter}{2}% 
+\contentsline {chapter}{\numberline {3}Conclusions}{3}% 
+\contentsline {section}{\numberline {3.1}Final Reminder}{3}% 
+\contentsline {chapter}{Bibliography}{4}% 
