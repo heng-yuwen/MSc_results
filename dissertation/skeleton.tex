@@ -21,6 +21,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[msc,deptreport,dsti]{infthesis} % Do not change except to add your degree (see above).
+\usepackage{subfiles}
 
 \begin{document}
 \begin{preliminary}
@@ -46,28 +47,25 @@ Finally, I would like to send my love to my fiancee Danni Li for her accompany d
 
 
 \chapter{Introduction}
-\subfile{cp1-introduction.tex}
+\subfile{sections/cp1-introduction.tex}
 
-\chapter{Your next chapter}
+\chapter{Background Research}
+\subfile{sections/cp2-background.tex}
 
-A dissertation usually contains several chapters.
+\chapter{Adapted Data Reduction Methods}
+\subfile{sections/cp3-methodology.tex}
 
-\chapter{Conclusions}
+\chapter{Data Reduction Evaluations}
+\subfile{sections/cp4-revaluation.tex}
 
-\section{Final Reminder}
+\chapter{Trade-off Framework}
+\subfile{sections/cp5-tfframework.tex}
 
-The body of your dissertation, before the references and any appendices,
-\emph{must} finish by page~40. The introduction, after preliminary material,
-should have started on page~1.
+\chapter{Trade-off Evaluation}
+\subfile{sections/cp6-tfevaluation.tex}
 
-You may not change the dissertation format (e.g., reduce the font
-size, change the margins, or reduce the line spacing from the default
-1.5 spacing). Over length or incorrectly-formatted dissertations will
-not be accepted and you would have to modify your dissertation and
-resubmit.  You cannot assume we will check your submission before the
-final deadline and if it requires resubmission after the deadline to
-conform to the page and style requirements you will be subject to the
-usual late penalties based on your final submission time.
+\chapter{Conclusion and Future Work}
+\subfile{sections/conclusion}
 
 \bibliographystyle{plain}
 \bibliography{mybibfile}

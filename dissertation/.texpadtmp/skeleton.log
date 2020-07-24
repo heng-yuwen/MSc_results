@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.23)  24 JUL 2020 21:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.23)  25 JUL 2020 02:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -117,25 +117,32 @@ Package caption3 Info: TeX engine: e-TeX on input line 64.
 )
 \c@caption@flags=\count92
 \c@ContinuedFloat=\count93
+)) (/usr/local/texlive/2019/texmf-dist/tex/latex/subfiles/subfiles.sty
+Package: subfiles 2018/07/31 Federico Garcia, Gernot Salzer
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks16
+\verbatim@line=\toks17
+\verbatim@in@stream=\read1
 )) (/Users/hengyuwen/MSc Data Science/project/MSc_results/dissertation/.texpadtmp/skeleton.aux)
 \openout1 = `skeleton.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 25.
-LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 26.
+LaTeX Font Info:    Try loading font information for OMS+pzccm on input line 26.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -178,12 +185,12 @@ LaTeX Font Info:    ... okay on input line 25.
 \scratchbox=\box27
 \nofMPsegments=\count95
 \nofMParguments=\count96
-\everyMPshowfont=\toks16
+\everyMPshowfont=\toks18
 \MPscratchCnt=\count97
 \MPscratchDim=\dimen119
 \MPnumerator=\count98
 \makeMPintoPDFobject=\count99
-\everyMPtoPDFconversion=\toks17
+\everyMPtoPDFconversion=\toks19
 ) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
  (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
@@ -220,55 +227,55 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 37.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 36.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 37.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 18.66588pt on input line 36.
+(Font)              scaled to size 18.66588pt on input line 37.
  [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 10.79993pt on input line 36.
+(Font)              scaled to size 10.79993pt on input line 37.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 36.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 37.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 36.
+(Font)              scaled to size 10.79993pt on input line 37.
  [1
 
 ]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 38.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 38.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 39.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 15.55188pt on input line 38.
+(Font)              scaled to size 15.55188pt on input line 39.
  [2]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 44.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 44.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 45.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 22.39185pt on input line 44.
+(Font)              scaled to size 22.39185pt on input line 45.
  (/Users/hengyuwen/MSc Data Science/project/MSc_results/dissertation/.texpadtmp/skeleton.toc
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
-LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 4.
+LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 2.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 4.
+LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 2.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+psycm on input line 4.
+LaTeX Font Info:    Try loading font information for OMX+psycm on input line 2.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 4.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 4.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 )
 \tf@toc=\write3
 \openout3 = `skeleton.toc'.
@@ -277,46 +284,53 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 
 ]
 Chapter 1.
-./skeleton.tex:49: Undefined control sequence.
-l.49 \subfile
-             {cp1-introduction.tex}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[1
+(./sections/cp1-introduction.tex) [1
 
 
 ]
 Chapter 2.
-[2
+(./sections/cp2-background.tex) [2
 
 ]
 Chapter 3.
-(/Users/hengyuwen/MSc Data Science/project/MSc_results/dissertation/.texpadtmp/skeleton.bbl [3
+(./sections/cp3-methodology.tex) [3
+
+]
+Chapter 4.
+(./sections/cp4-revaluation.tex) [4
+
+]
+Chapter 5.
+(./sections/cp5-tfframework.tex) [5
+
+]
+Chapter 6.
+(./sections/cp6-tfevaluation.tex) [6
+
+]
+Chapter 7.
+(./sections/conclusion.tex) (/Users/hengyuwen/MSc Data Science/project/MSc_results/dissertation/.texpadtmp/skeleton.bbl [7
 
 ]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [4
+) [8
 
 ] (/Users/hengyuwen/MSc Data Science/project/MSc_results/dissertation/.texpadtmp/skeleton.aux) ) 
 Here is how much of TeX's memory you used:
- 3587 strings out of 492616
- 56327 string characters out of 6129481
- 122965 words of memory out of 5000000
- 7454 multiletter control sequences out of 15000+600000
- 29330 words of font info for 56 fonts, out of 8000000 for 9000
+ 3648 strings out of 492616
+ 57653 string characters out of 6129481
+ 125704 words of memory out of 5000000
+ 7488 multiletter control sequences out of 15000+600000
+ 28194 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,4n,40p,1317b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "/Users/hengyuwen/MSc Data Science/project/MSc_results/dissertation/.texpadtmp/skeleton.pdf" (8 pages, 53685 bytes).
+Output written on "/Users/hengyuwen/MSc Data Science/project/MSc_results/dissertation/.texpadtmp/skeleton.pdf" (12 pages, 59073 bytes).
 PDF statistics:
- 52 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+ 64 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
