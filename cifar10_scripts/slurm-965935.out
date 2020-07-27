@@ -1,0 +1,51 @@
+Traceback (most recent call last):
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/_vendor/toolz/__init__.py", line 28, in <module>
+    from cytoolz import __version__ as cytoolz_version
+ModuleNotFoundError: No module named 'cytoolz'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/cli/main.py", line 137, in main
+    from ..activate import main as activator_main
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/activate.py", line 22, in <module>
+    from ._vendor.toolz import concatv, drop
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/_vendor/toolz/__init__.py", line 36, in <module>
+    from .dicttoolz import *
+ModuleNotFoundError: No module named 'conda._vendor.toolz.dicttoolz'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/_vendor/toolz/__init__.py", line 28, in <module>
+    from cytoolz import __version__ as cytoolz_version
+ModuleNotFoundError: No module named 'cytoolz'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/s1572869/miniconda3/bin/conda", line 13, in <module>
+    sys.exit(main())
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/cli/main.py", line 145, in main
+    init_loggers()
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/cli/main.py", line 56, in init_loggers
+    from ..gateways.logging import initialize_logging, set_verbosity
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/gateways/logging.py", line 14, in <module>
+    from ..common.io import attach_stderr_handler
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/common/io.py", line 29, in <module>
+    from .path import expand
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/common/path.py", line 16, in <module>
+    from .._vendor.toolz import accumulate, concat, take
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/conda/_vendor/toolz/__init__.py", line 36, in <module>
+    from .dicttoolz import *
+ModuleNotFoundError: No module named 'conda._vendor.toolz.dicttoolz'
+Traceback (most recent call last):
+  File "cifar10_experiments.py", line 5, in <module>
+    import numpy as np
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import core
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/numpy/core/__init__.py", line 76, in <module>
+    from . import numerictypes as nt
+  File "/home/s1572869/miniconda3/lib/python3.7/site-packages/numpy/core/numerictypes.py", line 89, in <module>
+    from numpy.compat import bytes, long
+ImportError: cannot import name 'bytes' from 'numpy.compat' (unknown location)
