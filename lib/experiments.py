@@ -320,7 +320,7 @@ def run_cl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage
     print("------------------ Start to select subsets ------------------")
     selected_data_idx = []
     if num_samples == 0:
-        num_samples = int(i/10 * len(compressed_train_y))
+        num_samples = int(i / 10 * len(compressed_train_y))
         print("Select {} percent samples".format(i))
     print("Select {} samples".format(num_samples))
 
@@ -328,7 +328,7 @@ def run_cl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage
         subset_idx = np.argwhere(compressed_train_y == i)
         subset_scores = scores[subset_idx]
         subset_rank = np.asarray(sorted(range(len(subset_scores)), key=lambda k: subset_scores[k], reverse=True))
-        subset_selected_idx = subset_rank[: int(num_samples/classes)]
+        subset_selected_idx = subset_rank[: int(num_samples / classes)]
         selected_data_idx.append(subset_idx[subset_selected_idx])
     # selected_data_idx = rank[: num_samples]
     selected_data_idx = reduce(np.union1d, selected_data_idx)
@@ -352,7 +352,7 @@ def run_wcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
     history = []
     print("------------------ Start to select subsets ------------------")
     if num_samples == 0:
-        num_samples = int(i/10 * len(compressed_train_y))
+        num_samples = int(i / 10 * len(compressed_train_y))
         print("Select {} percent samples".format(i))
     print("Select {} samples".format(num_samples))
 
