@@ -105,7 +105,7 @@ def _group_consecutives(attribute_with_label, step=0):
     result = [run]
     expect_value = None
     expect_label = None
-    for v in attribute_with_label:
+    for v in attribute_with_label :
         if (v[1] == expect_label) or (expect_label is None):
             run.append(v[0])
             if v[0] == expect_value:
@@ -118,10 +118,48 @@ def _group_consecutives(attribute_with_label, step=0):
     return result
 
 
-def _resort(sort_index, attributes, labels):
+def _resort(attributes, labels):
     """Resort the orders within consecutive repeating attribute values"""
-    raise NotImplementedError("This function is not implemented because no consecutive repeating attributes found for "
-                              "now.")
+    attributes = np.array(attributes)
+    labels = np.array(labels)
+    start_value = attributes[0]
+    start_label = labels[0]
+    previous_label = labels[0]
+    resort_idx = np.array(([])).astype("int64")
+    start_idx = 0
+    end_idx = 0
+
+    for i in range(len(attributes)):
+        if np.abs(attributes[i] - start_value) <= 0.01:
+            end_idx = i
+        if i == len(attributes) - 1 or np.abs(attributes[i] - start_value) > 0.01:
+            end_label = labels[i]
+            inner_labels = labels[start_idx: end_idx + 1]
+            unique_labels = np.unique(inner_labels)
+            print(inner_labels, start_label, unique_labels, i)
+            previous_length = len(resort_idx)
+            resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == previous_label) + previous_length),
+                                        axis=None)
+            if previous_label != start_label and start_label != end_label:
+                resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == start_label) + previous_length),
+                                            axis=None)
+            for label in unique_labels:
+                if label != start_label and label != end_label and label != previous_label:
+                    resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == label) + previous_length),
+                                                axis=None)
+
+            resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == end_label) + previous_length),
+                                        axis=None)
+            if i == len(attributes) - 1 and np.abs(attributes[i] - start_value) > 0.01:
+                resort_idx = np.concatenate((resort_idx, len(resort_idx)), axis=None)
+            start_idx = i
+            end_idx = i
+            previous_label = labels[i - 1]
+            start_label = end_label
+            start_value = attributes[i]
+
+    return resort_idx
+
 
 
 class POP(object):
@@ -144,8 +182,17 @@ class POP(object):
         assert len(attribute) == len(self.y), "The length doesn't match."
         # sort the samples according to the attribute value.
         sort_index = np.argsort(attribute)
+        first_sort_attr = attribute[sort_index]
+        first_sort_label = self.y[sort_index]
+
+        resort_index = _resort(first_sort_attr, first_sort_label)
+
+        # second sort, sort same value
+        assert len(sort_index) == len(resort_index)
+        sort_index = sort_index[resort_index]
 
         attribute_with_label = np.concatenate((sort_index.reshape(-1, 1), self.y[sort_index].reshape(-1, 1)), axis=1)
+
         grouped_index = _group_consecutives(attribute_with_label)
         for group in grouped_index:
             if len(group) >= 3:
