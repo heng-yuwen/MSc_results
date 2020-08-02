@@ -130,28 +130,35 @@ def _resort(attributes, labels):
     end_idx = 0
 
     for i in range(len(attributes)):
+
         if np.abs(attributes[i] - start_value) <= 0.01:
             end_idx = i
         if i == len(attributes) - 1 or np.abs(attributes[i] - start_value) > 0.01:
+
             end_label = labels[i]
             inner_labels = labels[start_idx: end_idx + 1]
             unique_labels = np.unique(inner_labels)
-            print(inner_labels, start_label, unique_labels, i)
             previous_length = len(resort_idx)
+            # print(i, inner_labels, previous_label, end_label, start_label)
             resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == previous_label) + previous_length),
                                         axis=None)
+            # print(resort_idx)
             if previous_label != start_label and start_label != end_label:
                 resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == start_label) + previous_length),
                                             axis=None)
             for label in unique_labels:
+
                 if label != start_label and label != end_label and label != previous_label:
                     resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == label) + previous_length),
                                                 axis=None)
+                    # print(resort_idx)
 
-            resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == end_label) + previous_length),
-                                        axis=None)
+            if end_label != previous_label:
+                resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == end_label) + previous_length),
+                                            axis=None)
             if i == len(attributes) - 1 and np.abs(attributes[i] - start_value) > 0.01:
                 resort_idx = np.concatenate((resort_idx, len(resort_idx)), axis=None)
+            # print(resort_idx)
             start_idx = i
             end_idx = i
             previous_label = labels[i - 1]
@@ -159,8 +166,6 @@ def _resort(attributes, labels):
             start_value = attributes[i]
 
     return resort_idx
-
-
 
 class POP(object):
     """Implementation of the patterns by ordered projections(POP) algorithm. Cited: Riquelme J C, Aguilar-Ruiz J S,
@@ -185,8 +190,10 @@ class POP(object):
         first_sort_attr = attribute[sort_index]
         first_sort_label = self.y[sort_index]
 
-        resort_index = _resort(first_sort_attr, first_sort_label)
+        # print(first_sort_attr[)
+        # print(first_sort_label[50:60])
 
+        resort_index = _resort(first_sort_attr, first_sort_label)
         # second sort, sort same value
         assert len(sort_index) == len(resort_index)
         sort_index = sort_index[resort_index]
