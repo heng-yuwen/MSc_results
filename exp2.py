@@ -49,7 +49,9 @@ def subset(seed, size):
         train_idx = np.union1d(train_idx, np.argwhere(y_train == class_id))
         test_idx = np.union1d(test_idx, np.argwhere(y_test == class_id))
         valid_idx = np.union1d(valid_idx, np.argwhere(y_valid == class_id))
-
+        print(len(train_idx))
+        print(len(test_idx))
+        print(len(valid_idx))
     model.extracted_features = extracted_train_features[train_idx]
 
     # use dense layer to test feature quality
@@ -73,6 +75,12 @@ y_test = to_categorical(y_test, num_classes=100)
 
 # split a validation set
 x_train, x_valid, y_train, y_valid = train_test_split(x_train, y_train, test_size=0.2, random_state=42)
+y_train = np.array(y_train)
+y_test= np.array(y_test)
+y_valid = np.array(y_valid)
+
+
+
 
 print("There are {} training samples and {} validation samples".format(x_train.shape[0], x_valid.shape[0]))
 print("There are {} test samples.".format(x_test.shape[0]))
