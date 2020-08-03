@@ -46,9 +46,9 @@ def subset(seed, size):
     valid_idx = np.array([]).astype("int64")
     test_idx = np.array([]).astype("int64")
     for class_id in classes:
-        train_idx = np.union1d(train_idx, np.argwhere(y_train == class_id))
-        test_idx = np.union1d(test_idx, np.argwhere(y_test == class_id))
-        valid_idx = np.union1d(valid_idx, np.argwhere(y_valid == class_id))
+        train_idx = np.union1d(train_idx, np.argwhere(np.argmax(y_train, axis=1) == class_id))
+        test_idx = np.union1d(test_idx, np.argwhere(np.argmax(y_test, axis=1) == class_id))
+        valid_idx = np.union1d(valid_idx, np.argwhere(np.argmax(y_valid, axis=1) == class_id))
         print(len(train_idx))
         print(len(test_idx))
         print(len(valid_idx))
