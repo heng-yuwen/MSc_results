@@ -49,9 +49,9 @@ def subset(seed, size):
         train_idx = np.union1d(train_idx, np.argwhere(np.argmax(y_train, axis=1) == class_id))
         test_idx = np.union1d(test_idx, np.argwhere(np.argmax(y_test, axis=1) == class_id))
         valid_idx = np.union1d(valid_idx, np.argwhere(np.argmax(y_valid, axis=1) == class_id))
-        print(len(train_idx))
-        print(len(test_idx))
-        print(len(valid_idx))
+    print(len(train_idx))
+    print(len(test_idx))
+    print(len(valid_idx))
     model.extracted_features = extracted_train_features[train_idx]
 
     # use dense layer to test feature quality
