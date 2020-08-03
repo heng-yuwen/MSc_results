@@ -63,7 +63,7 @@ def subset(seed, size):
                                      validation_data=(x_valid[valid_idx], y_valid[valid_idx]))
     model.save_history(history, name="train_" + str(seed) + "_" + str(size) + "_" + "classifier_his1")
 
-    loss, accuracy = model.classifier.evaluate(x_valid[valid_idx], y_valid[valid_idx])
+    loss, accuracy = model.classifier.evaluate(model.extracted_valid_features, y_valid[valid_idx])
     if (accuracy > 0.75 and accuracy < 0.78) or (accuracy > 0.81 and accuracy < 0.83)  or (accuracy > 0.85 and accuracy < 0.89):
         compressed_subtrain = model.compressor.predict(extracted_train_features[train_idx], batch_size=batch_size, verbose=1)
         pd.DataFrame(np.append(compressed_subtrain, y_test, axis=1)).to_csv(
