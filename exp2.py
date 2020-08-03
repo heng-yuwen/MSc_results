@@ -52,7 +52,8 @@ def subset(seed, size):
     print(len(train_idx))
     print(len(test_idx))
     print(len(valid_idx))
-    model.extracted_features = extracted_train_features[train_idx]
+    model.extracted_features = np.array(extracted_train_features)[train_idx]
+    model.extracted_valid_features = np.array(extracted_valid_features)[valid_idx]
 
     # use dense layer to test feature quality
     history = model.train_classifier(y_train[train_idx], epochs=500, batch_size=batch_size, validation_data=(x_valid[valid_idx], y_valid[valid_idx]))
@@ -95,6 +96,7 @@ print("There are {} test samples.".format(x_test.shape[0]))
 # load features
 model.load_features()
 extracted_train_features = model.extracted_features
+extracted_valid_features = model.extracted_valid_features
 
 test_scores = []
 for j in range(1, 6):
