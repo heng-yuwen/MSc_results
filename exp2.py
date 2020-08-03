@@ -41,6 +41,7 @@ x_test = preprocess_data(x_test)
 # select subsets
 def subset(seed, size):
     random.seed(seed)
+    model = NASNetLargeExtractor(32, size, model_path="models/cifar100", data_path="datasets/cifar100")
     classes = np.random.choice(range(100), size, replace=False)
     train_idx = np.array([]).astype("int64")
     valid_idx = np.array([]).astype("int64")

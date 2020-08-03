@@ -74,7 +74,7 @@ class EGDIS(object):
 
         return selected_boundary, irrelevance_scores
 
-    def fit(self, x, y):
+    def fit(self, x, y, k=4):
         """Run the algorithm and return selected samples.
         :param x: the training set.
         :param y: the labels of the training set.
@@ -82,6 +82,10 @@ class EGDIS(object):
 
         # start the EGDIS algorithm
         # select from the boundary samples.
+        if k != 4:
+            self.k = k
+            self.neigh = NearestNeighbors(n_neighbors=k, n_jobs=-1)
+
         selected_boundary, irrelevance_scores = self.select_boundary(x, y)
 
         # calculate the irrelevance of each sample, 0 means no neighbors have different labels.
