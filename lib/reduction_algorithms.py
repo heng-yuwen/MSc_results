@@ -118,7 +118,7 @@ def _group_consecutives(attribute_with_label, step=0):
     return result
 
 
-def _resort(attributes, labels):
+def _resort(attributes, labels, threshold=0.01):
     """Resort the orders within consecutive repeating attribute values"""
     attributes = np.array(attributes)
     labels = np.array(labels)
@@ -131,9 +131,9 @@ def _resort(attributes, labels):
 
     for i in range(len(attributes)):
 
-        if np.abs(attributes[i] - start_value) <= 0.01:
+        if np.abs(attributes[i] - start_value) <= threshold:
             end_idx = i
-        if i == len(attributes) - 1 or np.abs(attributes[i] - start_value) > 0.01:
+        if i == len(attributes) - 1 or np.abs(attributes[i] - start_value) > threshold:
 
             end_label = labels[i]
             inner_labels = labels[start_idx: end_idx + 1]
@@ -156,7 +156,7 @@ def _resort(attributes, labels):
             if end_label != previous_label:
                 resort_idx = np.concatenate((resort_idx, np.argwhere(inner_labels == end_label) + previous_length),
                                             axis=None)
-            if i == len(attributes) - 1 and np.abs(attributes[i] - start_value) > 0.01:
+            if i == len(attributes) - 1 and np.abs(attributes[i] - start_value) > threshold:
                 resort_idx = np.concatenate((resort_idx, len(resort_idx)), axis=None)
             # print(resort_idx)
             start_idx = i
@@ -178,7 +178,7 @@ class POP(object):
         self.x = None
         self.y = None
 
-    def _cal_weakness(self, attribute):
+    def _cal_weakness(self, attribute, threshold=0.01):
         """Calculate the weakness of the instances for one attribute.
         :param attribute: an 1D array of a single attribute across all samples.
         """
@@ -193,7 +193,7 @@ class POP(object):
         # print(first_sort_attr[)
         # print(first_sort_label[50:60])
 
-        resort_index = _resort(first_sort_attr, first_sort_label)
+        resort_index = _resort(first_sort_attr, first_sort_label, threshold)
         # second sort, sort same value
         assert len(sort_index) == len(resort_index)
         sort_index = sort_index[resort_index]
@@ -207,7 +207,7 @@ class POP(object):
 
         return weakness
 
-    def fit(self, x, y):
+    def fit(self, x, y, threshold=0.01):
         """Get the weakness score for each sample.
         :param x: the training set.
         :param y: the the label of the samples.
@@ -219,7 +219,7 @@ class POP(object):
         else:
             self.y = y
 
-        weakness_list = np.array([self._cal_weakness(attribute) for attribute in self.x.T]).sum(axis=0)
+        weakness_list = np.array([self._cal_weakness(attribute, threshold) for attribute in self.x.T]).sum(axis=0)
 
         return weakness_list
 
