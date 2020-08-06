@@ -254,8 +254,10 @@ def run_pop(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
 
     print("Now try to run the algorithm POP")
 
-    sample_weakness = pop.fit(compressed_train_x, compressed_train_y)
+    sample_weakness = pop.fit(compressed_train_x, compressed_train_y, 1)
+    sample_weakness = sample_weakness.astype(np.int64)
     print("------------------ Start to select subsets ------------------")
+
     history = []
 
     if num_samples != 0:

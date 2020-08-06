@@ -70,6 +70,12 @@ def subset(seed, size):
         pd.DataFrame(np.append(compressed_subtrain, y_train[train_idx], axis=1)).to_csv(
             os.path.join(os.getcwd(), "datasets", "subsets", "compressed_train_" + str(seed) + "_" + str(size) + "_" + str(accuracy) +".csv"), index=False)
 
+        compressed_subvalid = model.compressor_layer.predict(model.extracted_valid_features, batch_size=batch_size, verbose=1)
+        pd.DataFrame(np.append(compressed_subvalid, y_train[train_idx], axis=1)).to_csv(
+            os.path.join(os.getcwd(), "datasets", "subsets",
+                         "compressed_valid_" + str(seed) + "_" + str(size) + "_" + str(accuracy) + ".csv"), index=False)
+
+
     return accuracy
 
 y_train = to_categorical(y_train, num_classes=100)
