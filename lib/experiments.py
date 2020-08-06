@@ -249,43 +249,45 @@ def train_with_original(train, valid, test, net, dataset, batch_size=128, name="
 
 
 def run_pop(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
-    compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
-    pop = POP()
-
-    print("Now try to run the algorithm POP")
-
-    sample_weakness = pop.fit(compressed_train_x, compressed_train_y, 1)
-    sample_weakness = sample_weakness.astype(np.int64)
-    print("------------------ Start to select subsets ------------------")
-
+    # compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
+    # pop = POP()
+    #
+    # print("Now try to run the algorithm POP")
+    #
+    # sample_weakness = pop.fit(compressed_train_x, compressed_train_y, 1)
+    # sample_weakness = sample_weakness.astype(np.int64)
+    # print("------------------ Start to select subsets ------------------")
+    #
     history = []
+    #
+    # if num_samples != 0:
+    #     print("Start to select {} samples for a fair comparison.".format(num_samples))
+    #     i = 1
+    #     while len(np.argwhere(sample_weakness <= i)) <= num_samples:
+    #         i += 1
+    #
+    #     i -= 1
+    #     selected_idx = np.argwhere(sample_weakness <= i)
+    #     print("Selected {} samples for weakness < {}".format(len(selected_idx), i))
+    #     num_diff = num_samples - len(selected_idx)
+    #     if num_diff != 0:
+    #         print("Now select extra {} samples by random".format(num_diff))
+    #         next_weakness_idx = np.setdiff1d(np.argwhere(sample_weakness <= i + 1), np.argwhere(sample_weakness <= i))
+    #         diff_idx = next_weakness_idx[np.random.choice(len(next_weakness_idx), num_diff, replace=False)]
+    #         subset_idx = np.union1d(selected_idx, diff_idx)
+    #     else:
+    #         subset_idx = selected_idx
+    #     size = len(subset_idx)
+    #
+    # else:
+    #     # for i in range(1, int(sample_weakness.max()), 3):
+    #     subset_idx = np.argwhere(sample_weakness <= i).reshape(-1)
+    #     size = len(subset_idx)
+    #     print("Selected {} samples for weakkness <= {}.".format(size, i))
 
-    if num_samples != 0:
-        print("Start to select {} samples for a fair comparison.".format(num_samples))
-        i = 1
-        while len(np.argwhere(sample_weakness <= i)) <= num_samples:
-            i += 1
-
-        i -= 1
-        selected_idx = np.argwhere(sample_weakness <= i)
-        print("Selected {} samples for weakness < {}".format(len(selected_idx), i))
-        num_diff = num_samples - len(selected_idx)
-        if num_diff != 0:
-            print("Now select extra {} samples by random".format(num_diff))
-            next_weakness_idx = np.setdiff1d(np.argwhere(sample_weakness <= i + 1), np.argwhere(sample_weakness <= i))
-            diff_idx = next_weakness_idx[np.random.choice(len(next_weakness_idx), num_diff, replace=False)]
-            subset_idx = np.union1d(selected_idx, diff_idx)
-        else:
-            subset_idx = selected_idx
-        size = len(subset_idx)
-
-    else:
-        # for i in range(1, int(sample_weakness.max()), 3):
-        subset_idx = np.argwhere(sample_weakness <= i).reshape(-1)
-        size = len(subset_idx)
-        print("Selected {} samples for weakkness <= {}.".format(size, i))
-
+    subset_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "selected_pop_idx.npy"))
     print("Train with the selected {} samples.".format(len(subset_idx)))
+    size = len(subset_idx)
     his = train_with_original((train[0][subset_idx], train[1][subset_idx]), valid, test, net, dataset,
                               batch_size=batch_size, name="pop", stage=stage)
     his["size"] = size
@@ -297,7 +299,7 @@ def run_pop(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
 
 
 def run_egdis(train, valid, test, net, dataset, classes, batch_size=128, stage=1):
-    compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
+    # compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
     # egdis = EGDIS()
 
     print("Now try to run the algorithm EGDIS with the generated sample dataset.")
@@ -345,7 +347,7 @@ def run_cl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage
 
 
 def run_wcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
-    compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
+    # compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
     # Sampling selection selection
     # cl = CL()
     # cl.fit_dataset(classes=classes, dataset=dataset)
@@ -354,14 +356,22 @@ def run_wcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
     history = []
     print("------------------ Start to select subsets ------------------")
     if num_samples == 0:
-        num_samples = int(i / 10 * len(compressed_train_y))
+        num_samples = int(i / 10 * len(train[1]))
         print("Select {} percent samples".format(i))
     print("Select {} samples".format(num_samples))
 
     if stage == 1:
-        selected_data_idx = np.random.choice(len(compressed_train_y), num_samples,
-                                             replace=False,
-                                             p=scores / scores.sum())
+        selected_data_idx = []
+        for j in range(classes):
+            subset_idx = np.argwhere(train[1] == j)
+            subset_scores = scores[subset_idx]
+            subset_selected_idx = np.random.choice(len(subset_scores), int(num_samples / classes),
+                                                   replace=False,
+                                                   p=subset_scores.reshape(-1) / subset_scores.sum())
+
+            selected_data_idx.append(subset_idx[subset_selected_idx])
+
+        selected_data_idx = reduce(np.union1d, selected_data_idx)
         np.save(os.path.join(os.getcwd(), "datasets", dataset,
                              "im_wcl_select_size_" + str(num_samples) + ".npy"), selected_data_idx)
         print("Save selected sample idx")
@@ -378,131 +388,135 @@ def run_wcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
 
     return history
 
+# def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0, largest_percent=0.3):
+#     print("Now try to run the BWCL algorithm")
+#     selected_boundary_idx, _ = egdis.select_boundary(x, y)
+#     print("{} boundary samples".format(len(selected_boundary_idx)))
 
-def run_wcl4(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
-    print("Now try to run the WCL algorithm")
-    compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
-    # wcl = WCL()
-    # wcl.fit_dataset(classes=classes, dataset=dataset)
-    scores = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_scores.npy"))
-    selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_boundary_idx.npy"))
-    # scores, selected_boundary_idx = wcl.fit(compressed_train_x, compressed_train_y, classes)
-    print("Selected {} boundary instances.".format(len(selected_boundary_idx)))
-    history = []
-    # for i in range(1, 10, 2):
-    num_full = num_samples
-    num_samples = num_samples - len(selected_boundary_idx)
-    if num_samples > 0:
-        seleced_idx = selected_boundary_idx
-        while num_samples != 0:
-            diff_data_idx = np.random.choice(len(compressed_train_y), num_samples,
-                                             replace=False, p=scores / scores.sum())
-
-            seleced_idx = np.union1d(seleced_idx, diff_data_idx)
-            num_samples = num_full - len(seleced_idx)
-        print("Start to select {} samples for a fair comparison.".format(len(seleced_idx)))
-
-    else:
-        percent = i / 10.
-
-        if stage >= 1:
-            selected_data_idx = np.random.choice(len(compressed_train_y), int(percent * len(compressed_train_y)),
-                                                 replace=False, p=scores / scores.sum())
-            np.save(os.path.join(os.getcwd(), "datasets", dataset,
-                                 "wcl_select_size_" + str(percent) + ".npy"), selected_data_idx)
-        else:
-            selected_data_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset,
-                                                     "wcl_select_size_" + str(percent) + ".npy"))
-        print(
-            "Select {:.2f} percent samples, {} overlapping with the pre-selected boundary samples".format(percent * 100,
-                                                                                                          len(
-                                                                                                              np.intersect1d(
-                                                                                                                  selected_boundary_idx,
-                                                                                                                  selected_data_idx))))
-        seleced_idx = np.union1d(selected_boundary_idx, selected_data_idx)
-
-    print("The unique selected subset size is: {}".format(len(seleced_idx)))
-    his = train_with_original((train[0][seleced_idx], train[1][seleced_idx]), valid, test, net,
-                              dataset, batch_size=batch_size, name="wcl", stage=stage)
-    his["size"] = len(seleced_idx)
-    history.append(his)
-
-    return history
-
-
-def run_wcl2(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
-    # scale up boundary samples to score 1.
-    print("Now try to run the WCL algorithm, by scaling up boundary sample scores")
-    compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
-    # wcl = WCL()
-    # wcl.fit_dataset(classes=classes, dataset=dataset)
-    scores = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_scores.npy"))
-    selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_boundary_idx.npy"))
-    # scores, selected_boundary_idx = wcl.fit(compressed_train_x, compressed_train_y, classes)
-    print("Scale up the boundary sample scores to 1")
-    scores[selected_boundary_idx] = 1
-    # print("Selected {} boundary instances.".format(len(selected_boundary_idx)))
-    history = []
-    # for i in range(1, 10, 2):
-    if num_samples == 0:
-        num_samples = int(i / 10 * len(scores))
-    print("Start to select {} samples for a fair comparison.".format(num_samples))
-    if stage >= 1:
-        seleced_idx = np.random.choice(len(compressed_train_y), num_samples,
-                                       replace=False, p=scores / scores.sum())
-        np.save(os.path.join(os.getcwd(), "datasets", dataset,
-                             "wcl2_select_size_" + str(num_samples) + ".npy"), seleced_idx)
-    else:
-        seleced_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset,
-                                           "wcl2_select_size_" + str(num_samples) + ".npy"))
-
-    his = train_with_original((train[0][seleced_idx], train[1][seleced_idx]), valid, test, net,
-                              dataset, batch_size=batch_size, name="wcl2", stage=stage)
-    his["size"] = len(seleced_idx)
-    history.append(his)
-
-    return history
-
-
-def run_wcl3(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
-    # scale up boundary samples to score 1 from each subset to achieve balanced dataset.
-    print("Now try to run the WCL algorithm, by scaling up boundary sample scores")
-    compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
-    # wcl = WCL()
-    # wcl.fit_dataset(classes=classes, dataset=dataset)
-    scores = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_scores.npy"))
-    selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_boundary_idx.npy"))
-    # scores, selected_boundary_idx = wcl.fit(compressed_train_x, compressed_train_y, classes)
-    print("Scale up the boundary sample scores to 1")
-    scores[selected_boundary_idx] = 1
-    # print("Selected {} boundary instances.".format(len(selected_boundary_idx)))
-    history = []
-    # for i in range(1, 10, 2):
-    if num_samples == 0:
-        num_samples = int(i / 10 * len(scores))
-    print("Start to select {} samples for a fair comparison at each subset.".format(num_samples))
-    if stage >= 1:
-        idx_list = []
-        for i in range(classes):
-            class_idx = np.argwhere(compressed_train_y == i)
-            class_idx = class_idx.reshape(-1)
-            if len(class_idx) >= int(num_samples / classes):
-                seleced_idx = np.random.choice(len(class_idx), int(num_samples / classes),
-                                               replace=False, p=scores[class_idx] / scores[class_idx].sum())
-                idx_list.append(class_idx[seleced_idx])
-            else:
-                raise AttributeError("No enough samples for class {}".format(i + 1))
-        seleced_idx = reduce(np.union1d, idx_list)
-        np.save(os.path.join(os.getcwd(), "datasets", dataset,
-                             "wcl3_select_size_" + str(num_samples) + ".npy"), seleced_idx)
-    else:
-        seleced_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset,
-                                           "wcl3_select_size_" + str(num_samples) + ".npy"))
-
-    print("Selected {} samples from all the classes".format(len(seleced_idx)))
-    his = train_with_original((train[0][seleced_idx], train[1][seleced_idx]), valid, test, net,
-                              dataset, batch_size=batch_size, name="wcl3", stage=stage)
-    his["size"] = len(seleced_idx)
-    history.append(his)
-
-    return history
+# def run_wcl4(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
+#     print("Now try to run the WCL algorithm")
+#     compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
+#     # wcl = WCL()
+#     # wcl.fit_dataset(classes=classes, dataset=dataset)
+#     scores = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_scores.npy"))
+#     selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_boundary_idx.npy"))
+#     # scores, selected_boundary_idx = wcl.fit(compressed_train_x, compressed_train_y, classes)
+#     print("Selected {} boundary instances.".format(len(selected_boundary_idx)))
+#     history = []
+#     # for i in range(1, 10, 2):
+#     num_full = num_samples
+#     num_samples = num_samples - len(selected_boundary_idx)
+#     if num_samples > 0:
+#         seleced_idx = selected_boundary_idx
+#         while num_samples != 0:
+#             diff_data_idx = np.random.choice(len(compressed_train_y), num_samples,
+#                                              replace=False, p=scores / scores.sum())
+#
+#             seleced_idx = np.union1d(seleced_idx, diff_data_idx)
+#             num_samples = num_full - len(seleced_idx)
+#         print("Start to select {} samples for a fair comparison.".format(len(seleced_idx)))
+#
+#     else:
+#         percent = i / 10.
+#
+#         if stage >= 1:
+#             selected_data_idx = np.random.choice(len(compressed_train_y), int(percent * len(compressed_train_y)),
+#                                                  replace=False, p=scores / scores.sum())
+#             np.save(os.path.join(os.getcwd(), "datasets", dataset,
+#                                  "wcl_select_size_" + str(percent) + ".npy"), selected_data_idx)
+#         else:
+#             selected_data_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset,
+#                                                      "wcl_select_size_" + str(percent) + ".npy"))
+#         print(
+#             "Select {:.2f} percent samples, {} overlapping with the pre-selected boundary samples".format(percent * 100,
+#                                                                                                           len(
+#                                                                                                               np.intersect1d(
+#                                                                                                                   selected_boundary_idx,
+#                                                                                                                   selected_data_idx))))
+#         seleced_idx = np.union1d(selected_boundary_idx, selected_data_idx)
+#
+#     print("The unique selected subset size is: {}".format(len(seleced_idx)))
+#     his = train_with_original((train[0][seleced_idx], train[1][seleced_idx]), valid, test, net,
+#                               dataset, batch_size=batch_size, name="wcl", stage=stage)
+#     his["size"] = len(seleced_idx)
+#     history.append(his)
+#
+#     return history
+#
+#
+# def run_wcl2(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
+#     # scale up boundary samples to score 1.
+#     print("Now try to run the WCL algorithm, by scaling up boundary sample scores")
+#     compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
+#     # wcl = WCL()
+#     # wcl.fit_dataset(classes=classes, dataset=dataset)
+#     scores = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_scores.npy"))
+#     selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_boundary_idx.npy"))
+#     # scores, selected_boundary_idx = wcl.fit(compressed_train_x, compressed_train_y, classes)
+#     print("Scale up the boundary sample scores to 1")
+#     scores[selected_boundary_idx] = 1
+#     # print("Selected {} boundary instances.".format(len(selected_boundary_idx)))
+#     history = []
+#     # for i in range(1, 10, 2):
+#     if num_samples == 0:
+#         num_samples = int(i / 10 * len(scores))
+#     print("Start to select {} samples for a fair comparison.".format(num_samples))
+#     if stage >= 1:
+#         seleced_idx = np.random.choice(len(compressed_train_y), num_samples,
+#                                        replace=False, p=scores / scores.sum())
+#         np.save(os.path.join(os.getcwd(), "datasets", dataset,
+#                              "wcl2_select_size_" + str(num_samples) + ".npy"), seleced_idx)
+#     else:
+#         seleced_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset,
+#                                            "wcl2_select_size_" + str(num_samples) + ".npy"))
+#
+#     his = train_with_original((train[0][seleced_idx], train[1][seleced_idx]), valid, test, net,
+#                               dataset, batch_size=batch_size, name="wcl2", stage=stage)
+#     his["size"] = len(seleced_idx)
+#     history.append(his)
+#
+#     return history
+#
+#
+# def run_wcl3(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
+#     # scale up boundary samples to score 1 from each subset to achieve balanced dataset.
+#     print("Now try to run the WCL algorithm, by scaling up boundary sample scores")
+#     compressed_train_x, compressed_train_y = load_compressed_train_set(dataset, classes)
+#     # wcl = WCL()
+#     # wcl.fit_dataset(classes=classes, dataset=dataset)
+#     scores = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_scores.npy"))
+#     selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_boundary_idx.npy"))
+#     # scores, selected_boundary_idx = wcl.fit(compressed_train_x, compressed_train_y, classes)
+#     print("Scale up the boundary sample scores to 1")
+#     scores[selected_boundary_idx] = 1
+#     # print("Selected {} boundary instances.".format(len(selected_boundary_idx)))
+#     history = []
+#     # for i in range(1, 10, 2):
+#     if num_samples == 0:
+#         num_samples = int(i / 10 * len(scores))
+#     print("Start to select {} samples for a fair comparison at each subset.".format(num_samples))
+#     if stage >= 1:
+#         idx_list = []
+#         for i in range(classes):
+#             class_idx = np.argwhere(compressed_train_y == i)
+#             class_idx = class_idx.reshape(-1)
+#             if len(class_idx) >= int(num_samples / classes):
+#                 seleced_idx = np.random.choice(len(class_idx), int(num_samples / classes),
+#                                                replace=False, p=scores[class_idx] / scores[class_idx].sum())
+#                 idx_list.append(class_idx[seleced_idx])
+#             else:
+#                 raise AttributeError("No enough samples for class {}".format(i + 1))
+#         seleced_idx = reduce(np.union1d, idx_list)
+#         np.save(os.path.join(os.getcwd(), "datasets", dataset,
+#                              "wcl3_select_size_" + str(num_samples) + ".npy"), seleced_idx)
+#     else:
+#         seleced_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset,
+#                                            "wcl3_select_size_" + str(num_samples) + ".npy"))
+#
+#     print("Selected {} samples from all the classes".format(len(seleced_idx)))
+#     his = train_with_original((train[0][seleced_idx], train[1][seleced_idx]), valid, test, net,
+#                               dataset, batch_size=batch_size, name="wcl3", stage=stage)
+#     his["size"] = len(seleced_idx)
+#     history.append(his)
+#
+#     return history
