@@ -41,4 +41,9 @@ cd ..
 #python cifar10_experiments.py --experiment 4 --numbers 2130 --select 7 --batch_size 256  --stage 3
 #python cifar10_experiments.py --experiment 4 --numbers 5439 --select 7 --batch_size 256  --stage 3
 #python cifar10_experiments.py --experiment 4 --numbers 9674 --select 7 --batch_size 256  --stage 3
-python cifar10_experiments.py --experiment 4 --numbers 14546 --select 7 --batch_size 256  --stage 3
+#python cifar10_experiments.py --experiment 4 --numbers 14546 --select 7 --batch_size 256  --stage 3
+
+python cifar10_experiments.py --experiment 2 --batch_size 256  --stage 1
+python cifar10_experiments.py --experiment 3 --batch_size 256  --stage 1
+python cifar10_experiments.py --experiment 4 --batch_size 256  --stage 1
+python cifar10_experiments.py --experiment 5 --batch_size 256  --stage 1
