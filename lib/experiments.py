@@ -388,10 +388,60 @@ def run_wcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
 
     return history
 
-# def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0, largest_percent=0.3):
-#     print("Now try to run the BWCL algorithm")
-#     selected_boundary_idx, _ = egdis.select_boundary(x, y)
-#     print("{} boundary samples".format(len(selected_boundary_idx)))
+def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=1000, largest_percent=0.3):
+    print("Now try to run the BWCL algorithm")
+    selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "selected_boundary_idx.npy"))
+    print("{} boundary samples".format(len(selected_boundary_idx)))
+    scores = np.load(os.path.join(os.getcwd(), "datasets", dataset, "cl_scores.npy"))
+
+    boundary_labels = train[1][selected_boundary_idx]
+    max_num_boundary = int(num_samples / classes * largest_percent)
+    if stage == 1:
+        selected_data_idx = []
+        for j in range(classes):
+            subset_idx = np.argwhere(train[1] == j)
+            subset_boundary_idx = selected_boundary_idx[boundary_labels == j]
+            subset_no_boundary_idx = np.setdiff1d(subset_idx, subset_boundary_idx)
+            subset_no_boundary_scores = scores[subset_no_boundary_idx]
+
+            # select enough boundary samples
+            if len(subset_boundary_idx) > max_num_boundary:
+                select_boundary_idx2 = subset_boundary_idx[
+                    np.random.choice(len(subset_boundary_idx), max_num_boundary, replace=False)]
+                num_boundary = max_num_boundary
+            else:
+                select_boundary_idx2 = subset_boundary_idx.copy()
+                num_boundary = len(select_boundary_idx2)
+
+            #         print("selected {} samples, {} to go".format(num_boundary, int(num_samples/classes)-num_boundary))
+
+            select_no_boundary_idx = subset_no_boundary_idx[
+                np.random.choice(len(subset_no_boundary_scores), int(num_samples / classes) - num_boundary,
+                                 replace=False,
+                                 p=subset_no_boundary_scores.reshape(-1) / subset_no_boundary_scores.sum())]
+
+            selected_idx = np.union1d(select_no_boundary_idx, select_boundary_idx2)
+            selected_data_idx.append(selected_idx)
+
+        selected_data_idx = reduce(np.union1d, selected_data_idx)
+        np.save(os.path.join(os.getcwd(), "datasets", dataset,
+                             "im_bwcl_select_size_" + str(num_samples) + ".npy"), selected_data_idx)
+        print("Save selected sample idx")
+    else:
+        selected_data_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset,
+                                                 "im_bwcl_select_size_" + str(num_samples) + ".npy"))
+        print("Load selected sample idx")
+
+    print("Selected {} samples for a fair comparison.".format(len(selected_data_idx)))
+
+    history = []
+    his = train_with_original((train[0][selected_data_idx], train[1][selected_data_idx]), valid, test, net,
+                              dataset, batch_size=batch_size, name="im_bwcl", stage=stage)
+    his["size"] = len(selected_data_idx)
+    history.append(his)
+
+    return history
+
 
 # def run_wcl4(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
 #     print("Now try to run the WCL algorithm")
