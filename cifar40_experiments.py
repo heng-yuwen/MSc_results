@@ -35,6 +35,11 @@ y_valid = y_valid[x_valid_idx]
 x_test = x_test[x_test_idx]
 y_test = y_test[x_test_idx]
 
+unique_y = np.unique(y_train)
+y_train = np.array([np.argwhere(unique_y == y)[0][0] for y in y_train])
+y_valid = np.array([np.argwhere(unique_y == y)[0][0] for y in y_valid])
+y_test = np.array([np.argwhere(unique_y == y)[0][0] for y in y_test])
+
 batch_size = args.batch_size
 net = DenseNet121(num_classes=40)
 
