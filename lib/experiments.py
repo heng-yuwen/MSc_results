@@ -388,7 +388,7 @@ def run_wcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
 
     return history
 
-def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=1000, largest_percent=0.3):
+def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=1000, largest_percent=0.2):
     print("Now try to run the BWCL algorithm")
     selected_boundary_idx = np.load(os.path.join(os.getcwd(), "datasets", dataset, "selected_boundary_idx.npy"))
     print("{} boundary samples".format(len(selected_boundary_idx)))
