@@ -414,13 +414,22 @@ def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, sta
                 num_boundary = len(select_boundary_idx2)
 
             #         print("selected {} samples, {} to go".format(num_boundary, int(num_samples/classes)-num_boundary))
+            if len(subset_no_boundary_idx) < int(num_samples / classes)- num_boundary:
+                select_no_boundary_idx = subset_no_boundary_idx
 
-            select_no_boundary_idx = subset_no_boundary_idx[
-                np.random.choice(len(subset_no_boundary_scores), int(num_samples / classes) - num_boundary,
-                                 replace=False,
-                                 p=subset_no_boundary_scores.reshape(-1) / subset_no_boundary_scores.sum())]
+                residual_boundary_idx = np.setdiff1d(subset_boundary_idx, select_boundary_idx2)
+                select_residual_boundary_idx = residual_boundary_idx[np.random.choice(len(residual_boundary_idx), int(num_samples / classes)-num_boundary-len(subset_no_boundary_scores), replace=False)]
+                print(select_residual_boundary_idx)
+                select_no_boundary_idx = np.union1d(select_no_boundary_idx, select_residual_boundary_idx)
+                # print(select_no_boundary_idx)
+            else:
+                select_no_boundary_idx = subset_no_boundary_idx[
+                    np.random.choice(len(subset_no_boundary_scores), int(num_samples / classes) - num_boundary,
+                                     replace=False,
+                                     p=subset_no_boundary_scores.reshape(-1) / subset_no_boundary_scores.sum())]
 
             selected_idx = np.union1d(select_no_boundary_idx, select_boundary_idx2)
+            # print(len(selected_idx))
             selected_data_idx.append(selected_idx)
 
         selected_data_idx = reduce(np.union1d, selected_data_idx)
