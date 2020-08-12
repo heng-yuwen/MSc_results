@@ -396,6 +396,12 @@ def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, sta
 
     boundary_labels = train[1][selected_boundary_idx]
     max_num_boundary = int(num_samples / classes * largest_percent)
+
+    if num_samples == 0:
+        num_samples = int(i / 10 * len(train[1]))
+        print("Select {} percent samples".format(i))
+    print("Select {} samples".format(num_samples))
+
     if stage == 1:
         selected_data_idx = []
         for j in range(classes):
