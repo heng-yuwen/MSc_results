@@ -89,10 +89,10 @@ cd ..
 #python cifar40_experiments.py --experiment 4 --batch_size 256  --stage 2 --select 9
 #python cifar40_experiments.py --experiment 4 --batch_size 256  --stage 3 --select 9
 #
-python cifar40_experiments.py --experiment 5 --batch_size 256  --stage 1 --select 9
-python cifar40_experiments.py --experiment 5 --batch_size 256  --stage 2 --select 9
-python cifar40_experiments.py --experiment 5 --batch_size 256  --stage 3 --select 9
+#python cifar40_experiments.py --experiment 5 --batch_size 256  --stage 1 --select 9
+#python cifar40_experiments.py --experiment 5 --batch_size 256  --stage 2 --select 9
+#python cifar40_experiments.py --experiment 5 --batch_size 256  --stage 3 --select 9
 #
-#python cifar40_experiments.py --experiment 6 --batch_size 256  --stage 1 --select 9
-#python cifar40_experiments.py --experiment 6 --batch_size 256  --stage 2 --select 9
-#python cifar40_experiments.py --experiment 6 --batch_size 256  --stage 3 --select 9
+python cifar40_experiments.py --experiment 6 --batch_size 256  --stage 1 --select 9
+python cifar40_experiments.py --experiment 6 --batch_size 256  --stage 2 --select 9
+python cifar40_experiments.py --experiment 6 --batch_size 256  --stage 3 --select 9
