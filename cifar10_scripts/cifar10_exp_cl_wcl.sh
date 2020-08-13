@@ -38,11 +38,11 @@ source /home/${STUDENT_ID}/miniconda3/bin/activate mlp
 cd ..
 
 #python cifar10_experiments.py --experiment 4 --batch_size 256  --stage 1 --select 5
-python cifar10_experiments.py --experiment 4 --batch_size 256  --stage 2 --select 5
+#python cifar10_experiments.py --experiment 4 --batch_size 256  --stage 2 --select 5
 #python cifar10_experiments.py --experiment 4 --batch_size 256  --stage 3 --select 5
 #
 #python cifar10_experiments.py --experiment 5 --batch_size 256  --stage 1 --select 5
-#python cifar10_experiments.py --experiment 5 --batch_size 256  --stage 2 --select 5
+python cifar10_experiments.py --experiment 5 --batch_size 256  --stage 2 --select 5
 #python cifar10_experiments.py --experiment 5 --batch_size 256  --stage 3 --select 5
 #
 #python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 1 --select 5
