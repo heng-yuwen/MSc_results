@@ -186,7 +186,7 @@ def train_with_original(train, valid, test, net, dataset, batch_size=128, name="
         cudnn.benchmark = True
         print("Use multiple GPU to train the network.")
 
-    if stage != 1:
+    if stage > 1:
         print("load parameters")
         checkpoint = torch.load(
             os.path.join(os.getcwd(), "models", dataset,
@@ -217,10 +217,14 @@ def train_with_original(train, valid, test, net, dataset, batch_size=128, name="
         optimizer = optim.SGD(net.parameters(), lr=0.01,
                               momentum=0.9, weight_decay=5e-4)
         epochs = 100
-    else:
+    elif stage == 3:
         optimizer = optim.SGD(net.parameters(), lr=0.001,
                               momentum=0.9, weight_decay=5e-4)
         epochs = 100
+    else:
+        optimizer = optim.SGD(net.parameters(), lr=0.1,
+                              momentum=0.9, weight_decay=5e-4)
+        epochs = 10
 
     print("Use {} epochs".format(epochs))
 
@@ -240,10 +244,11 @@ def train_with_original(train, valid, test, net, dataset, batch_size=128, name="
     history["test_acc"] = test_acc
     history["test_loss"] = test_loss
 
-    print("Saving best model parameters with validation acc: {}".format(best_acc))
-    torch.save(best_state,
-               os.path.join(os.getcwd(), "models", dataset,
-                            name + "size_" + str(len(train[1])) + "_stage_" + str(stage) + "_set_ckpt.pth"))
+    if stage > 0:
+        print("Saving best model parameters with validation acc: {}".format(best_acc))
+        torch.save(best_state,
+                   os.path.join(os.getcwd(), "models", dataset,
+                                name + "size_" + str(len(train[1])) + "_stage_" + str(stage) + "_set_ckpt.pth"))
 
     return history
 
@@ -360,7 +365,7 @@ def run_wcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, stag
         print("Select {} percent samples".format(i))
     print("Select {} samples".format(num_samples))
 
-    if stage == 1:
+    if stage <= 1:
         selected_data_idx = []
         for j in range(classes):
             subset_idx = np.argwhere(train[1] == j)
@@ -456,6 +461,10 @@ def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, sta
     history.append(his)
 
     return history
+
+def collect_wcl(train, valid, test, net, dataset, classes, batch_size=256):
+    for i in range(5, 10, 100):
+        run_wcl(train, valid, test, net, dataset, classes, batch_size=batch_size, i=5, stage=0)
 
 
 # def run_wcl4(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
