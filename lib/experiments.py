@@ -463,8 +463,11 @@ def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, sta
     return history
 
 def collect_wcl(train, valid, test, net, dataset, classes, batch_size=256):
+    history = []
     for i in range(5, 10, 100):
-        run_wcl(train, valid, test, net, dataset, classes, batch_size=batch_size, i=5, stage=0)
+        his = run_wcl(train, valid, test, net, dataset, classes, batch_size=batch_size, i=5, stage=0)
+        history.append(his)
+    return history
 
 
 # def run_wcl4(train, valid, test, net, dataset, classes, batch_size=128, i=1, stage=1, num_samples=0):
