@@ -11,6 +11,7 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, Dataset
+from lib.densenet import DenseNet121
 
 from lib.data_loader import load_cifar10, load_cifar100
 from lib.reduction_algorithms import POP
@@ -454,17 +455,18 @@ def run_bwcl(train, valid, test, net, dataset, classes, batch_size=128, i=1, sta
 
     print("Selected {} samples for a fair comparison.".format(len(selected_data_idx)))
 
-    history = []
+    # history = []
     his = train_with_original((train[0][selected_data_idx], train[1][selected_data_idx]), valid, test, net,
                               dataset, batch_size=batch_size, name="im_bwcl", stage=stage)
     his["size"] = len(selected_data_idx)
-    history.append(his)
+    # history.append(his)
 
-    return history
+    return his
 
 def collect_wcl(train, valid, test, net, dataset, classes, batch_size=256):
     history = []
     for i in range(5, 10, 100):
+        net = DenseNet121(classes)
         his = run_wcl(train, valid, test, net, dataset, classes, batch_size=batch_size, i=5, stage=0)
         history.append(his)
     return history
