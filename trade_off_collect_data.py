@@ -26,9 +26,10 @@ batch_size = 256
 # Experiment 5: train the WCL selected dataset
 
 print("Train with the im wcl selected dataset.")
-history = collect_wcl((x_train, y_train), (x_valid, y_valid), (x_test, y_test), None, "cifar10", 10,
-                  batch_size=batch_size, )
-for his in history:
-    np.save(os.path.join(os.getcwd(), "models", "cifar10", "framework",
-                         "im_wcl_his_size_" + str(his[0]["size"]) + ".npy"), history[0])
+for i in range(500, 1000, 5):
+    history = collect_wcl((x_train, y_train), (x_valid, y_valid), (x_test, y_test), None, "cifar10", 10,
+                  batch_size=batch_size, i=i)
+    for his in history:
+        np.save(os.path.join(os.getcwd(), "models", "cifar10", "framework",
+                         "im_wcl_his_size_" + str(his["size"]) + ".npy"), history)
 print("History saved.")
