@@ -467,7 +467,7 @@ def collect_wcl(train, valid, test, net, dataset, classes, batch_size=256):
     history = []
     for i in range(5, 10, 100):
         net = DenseNet121(classes)
-        his = run_wcl(train, valid, test, net, dataset, classes, batch_size=batch_size, i=5, stage=0)
+        his = run_wcl(train, valid, test, net, dataset, classes, batch_size=batch_size, i=i, stage=0)
         history.append(his)
     return history
 
