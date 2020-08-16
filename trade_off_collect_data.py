@@ -31,5 +31,5 @@ history = collect_wcl((x_train, y_train), (x_valid, y_valid), (x_test, y_test), 
 for his in history:
     print(his)
     np.save(os.path.join(os.getcwd(), "models", "cifar10", "framework",
-                         "im_wcl_his_size_" + str(his["size"]) + ".npy"), history)
+                         "im_wcl_his_size_" + str(his[0]["size"]) + ".npy"), history)
 print("History saved.")
