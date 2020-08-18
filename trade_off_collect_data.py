@@ -26,7 +26,7 @@ batch_size = 256
 # Experiment 5: train the WCL selected dataset
 
 print("Train with the im wcl selected dataset.")
-for i in range(750, 800, 5):
+for i in range(800, 850, 5):
     history = collect_wcl((x_train, y_train), (x_valid, y_valid), (x_test, y_test), None, "cifar10", 10,
                   batch_size=batch_size, i=i)
     for his in history:
