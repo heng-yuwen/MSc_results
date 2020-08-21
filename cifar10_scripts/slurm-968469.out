@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "cifar10_experiments.py", line 8, in <module>
+    from lib.experiments import load_dataset, run_wcl, train_with_original, run_pop, run_egdis, run_cl, run_wcl2, run_wcl3
+  File "/home/s1572869/MSc_results/lib/experiments.py", line 12, in <module>
+    from sklearn.model_selection import train_test_split
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/sklearn/model_selection/__init__.py", line 19, in <module>
+    from ._validation import cross_val_score
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/sklearn/model_selection/_validation.py", line 30, in <module>
+    from ..metrics import check_scoring
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/sklearn/metrics/__init__.py", line 7, in <module>
+    from ._ranking import auc
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/sklearn/metrics/_ranking.py", line 36, in <module>
+    from ..preprocessing import label_binarize
+ImportError: cannot import name 'label_binarize' from 'sklearn.preprocessing' (unknown location)

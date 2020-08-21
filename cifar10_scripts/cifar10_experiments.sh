@@ -43,7 +43,21 @@ cd ..
 #python cifar10_experiments.py --experiment 4 --numbers 9674 --select 7 --batch_size 256  --stage 3
 #python cifar10_experiments.py --experiment 4 --numbers 14546 --select 7 --batch_size 256  --stage 3
 
-python cifar10_experiments.py --experiment 2 --batch_size 256  --stage 1
-python cifar10_experiments.py --experiment 3 --batch_size 256  --stage 1
-python cifar10_experiments.py --experiment 4 --batch_size 256  --stage 1
-python cifar10_experiments.py --experiment 5 --batch_size 256  --stage 1
+#python cifar10_experiments.py --experiment 2 --batch_size 256  --stage 3
+#python cifar10_experiments.py --experiment 3 --batch_size 256  --stage 1
+#python cifar10_experiments.py --experiment 3 --batch_size 256  --stage 2
+#python cifar10_experiments.py --experiment 3 --batch_size 256  --stage 3
+#python cifar10_experiments.py --experiment 4 --batch_size 256  --stage 3 --numbers 5966
+#python cifar10_experiments.py --experiment 5 --batch_size 256  --stage 3 --numbers 5966
+#
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 1 --numbers 5966
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 5966
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 3 --numbers 5966
+
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 1 --numbers 12000
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 12000
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 3 --numbers 12000
+
+python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 20000
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 28000
+#python cifar10_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 36000

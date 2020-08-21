@@ -37,7 +37,25 @@ export DATASET_DIR=${TMP}/datasets/
 source /home/${STUDENT_ID}/miniconda3/bin/activate mlp
 cd ..
 
-python cifar100_experiments.py --experiment 2 --batch_size 256  --stage 1
-python cifar100_experiments.py --experiment 3 --batch_size 256  --stage 1
-python cifar100_experiments.py --experiment 4 --batch_size 256  --stage 1
-python cifar100_experiments.py --experiment 5 --batch_size 256  --stage 1
+#python cifar100_experiments.py --experiment 2 --batch_size 256  --stage 2
+#python cifar100_experiments.py --experiment 2 --batch_size 256  --stage 3
+
+#python cifar100_experiments.py --experiment 3 --batch_size 256  --stage 2
+#python cifar100_experiments.py --experiment 3 --batch_size 256  --stage 3
+
+#python cifar100_experiments.py --experiment 5 --batch_size 256  --stage 3 --numbers 1000
+#python cifar100_experiments.py --experiment 4 --batch_size 256  --stage 1 --numbers 12592
+#python cifar100_experiments.py --experiment 4 --batch_size 256  --stage 2 --numbers 12592
+#python cifar100_experiments.py --experiment 4 --batch_size 256  --stage 3 --numbers 12592
+
+#python cifar100_experiments.py --experiment 5 --batch_size 256  --stage 1 --numbers 12592
+#python cifar100_experiments.py --experiment 5 --batch_size 256  --stage 2 --numbers 12592
+#python cifar100_experiments.py --experiment 5 --batch_size 256  --stage 3 --numbers 12592
+
+#Done python cifar100_experiments.py --experiment 6 --batch_size 256  --stage 1 --numbers 20000 
+python cifar100_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 20000
+#python cifar100_experiments.py --experiment 6 --batch_size 256  --stage 3 --numbers 20000
+
+#python cifar100_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 28000
+#python cifar100_experiments.py --experiment 6 --batch_size 256  --stage 2 --numbers 36000
+

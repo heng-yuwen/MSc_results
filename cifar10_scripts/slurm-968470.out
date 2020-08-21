@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "cifar10_experiments.py", line 8, in <module>
+    from lib.experiments import load_dataset, run_wcl, train_with_original, run_pop, run_egdis, run_cl, run_wcl2, run_wcl3
+  File "/home/s1572869/MSc_results/lib/experiments.py", line 15, in <module>
+    from lib.data_loader import load_cifar10, load_cifar100
+  File "/home/s1572869/MSc_results/lib/data_loader.py", line 26, in <module>
+    from tensorflow.python.keras import backend as K
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow/__init__.py", line 101, in <module>
+    from tensorflow_core import *
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/__init__.py", line 46, in <module>
+    from . _api.v2 import compat
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/__init__.py", line 39, in <module>
+    from . import v1
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/__init__.py", line 32, in <module>
+    from . import compat
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/__init__.py", line 39, in <module>
+    from . import v1
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/v1/__init__.py", line 29, in <module>
+    from tensorflow._api.v2.compat.v1 import app
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/__init__.py", line 39, in <module>
+    from . import v1
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/__init__.py", line 32, in <module>
+    from . import compat
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/__init__.py", line 40, in <module>
+    from . import v2
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v1/compat/v2/__init__.py", line 30, in <module>
+    from tensorflow._api.v2.compat.v2 import audio
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v2/__init__.py", line 33, in <module>
+    from . import compat
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v2/compat/__init__.py", line 40, in <module>
+    from . import v2
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/_api/v2/compat/v2/compat/v2/__init__.py", line 341, in <module>
+    [_module_util.get_parent_dir(keras)] + _current_module.__path__)
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/tensorflow_core/python/tools/module_util.py", line 24, in get_parent_dir
+    return os.path.abspath(os.path.join(os.path.dirname(module.__file__), ".."))
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/posixpath.py", line 156, in dirname
+    p = os.fspath(p)
+TypeError: expected str, bytes or os.PathLike object, not NoneType

@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "cifar100_experiments.py", line 7, in <module>
+    from lib.densenet import DenseNet121
+  File "/home/s1572869/MSc_results/lib/densenet.py", line 4, in <module>
+    import torch
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/__init__.py", line 307, in <module>
+    import torch.nn.quantized
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/nn/quantized/__init__.py", line 6, in <module>
+    from .modules import *
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/nn/quantized/modules/__init__.py", line 7, in <module>
+    from .conv import Conv2d, Conv3d
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/nn/quantized/modules/conv.py", line 12, in <module>
+    import torch.nn.intrinsic.qat as nniqat
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/nn/intrinsic/qat/__init__.py", line 2, in <module>
+    from .modules import LinearReLU
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/nn/intrinsic/qat/modules/__init__.py", line 3, in <module>
+    from .linear_relu import LinearReLU
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/nn/intrinsic/qat/modules/linear_relu.py", line 6, in <module>
+    class LinearReLU(nnqat.Linear):
+AttributeError: module 'torch.nn.qat' has no attribute 'Linear'

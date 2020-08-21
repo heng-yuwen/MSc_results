@@ -1,0 +1,15 @@
+/home/s1572869/miniconda3/etc/profile.d/conda.sh: /home/s1572869/miniconda3/bin/conda: /home/s1572869/miniconda3/bin/python: bad interpreter: Stale file handle
+Traceback (most recent call last):
+  File "cifar10_experiments.py", line 8, in <module>
+    from lib.experiments import load_dataset, run_wcl, train_with_original, run_pop, run_egdis, run_cl, run_wcl2, run_wcl3
+  File "/home/s1572869/MSc_results/lib/experiments.py", line 11, in <module>
+    import torchvision.transforms as transforms
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torchvision/__init__.py", line 4, in <module>
+    from torchvision import datasets
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torchvision/datasets/__init__.py", line 1, in <module>
+    from .lsun import LSUN, LSUNClass
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torchvision/datasets/lsun.py", line 2, in <module>
+    from PIL import Image
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/PIL/Image.py", line 94, in <module>
+    from . import _imaging as core
+ImportError: libwebp.so.7: cannot open shared object file: No such file or directory

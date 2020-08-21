@@ -1,0 +1,15 @@
+cifar100 loaded
+There are 40000 training samples and 10000 validation samples
+There are 10000 test samples.
+This is records for stage 2
+Train with the bwcl selected dataset.
+Now try to run the BWCL algorithm
+10347 boundary samples
+Traceback (most recent call last):
+  File "cifar100_experiments.py", line 93, in <module>
+    batch_size=batch_size, i=args.select, stage=args.stage, num_samples=numbers)
+  File "/home/s1572869/MSc_results/lib/experiments.py", line 432, in run_bwcl
+    "im_bwcl_select_size_" + str(num_samples) + ".npy"))
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/numpy/lib/npyio.py", line 428, in load
+    fid = open(os_fspath(file), "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/home/s1572869/MSc_results/datasets/cifar100/im_bwcl_select_size_20000.npy'

@@ -1,0 +1,14 @@
+cifar100 loaded
+There are 40000 training samples and 10000 validation samples
+There are 10000 test samples.
+This is records for stage 1
+Train with the bwcl selected dataset.
+Now try to run the BWCL algorithm
+10347 boundary samples
+Traceback (most recent call last):
+  File "cifar100_experiments.py", line 93, in <module>
+    batch_size=batch_size, i=args.select, stage=args.stage, num_samples=numbers)
+  File "/home/s1572869/MSc_results/lib/experiments.py", line 421, in run_bwcl
+    p=subset_no_boundary_scores.reshape(-1) / subset_no_boundary_scores.sum())]
+  File "mtrand.pyx", line 946, in numpy.random.mtrand.RandomState.choice
+ValueError: Cannot take a larger sample than population when 'replace=False'

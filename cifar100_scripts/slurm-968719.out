@@ -1,0 +1,25 @@
+cifar100 loaded
+There are 40000 training samples and 10000 validation samples
+There are 10000 test samples.
+This is records for stage 3
+Train with the im wcl selected dataset.
+------------------ Start to select subsets ------------------
+Select 1000 samples
+Load selected sample idx
+Selected 1000 samples for a fair comparison.
+Use multiple GPU to train the network.
+load parameters
+Traceback (most recent call last):
+  File "cifar100_experiments.py", line 83, in <module>
+    batch_size=batch_size, i=args.select, stage=args.stage, num_samples=numbers)
+  File "/home/s1572869/MSc_results/lib/experiments.py", line 373, in run_wcl
+    dataset, batch_size=batch_size, name="im_wcl", stage=stage)
+  File "/home/s1572869/MSc_results/lib/experiments.py", line 193, in train_with_original
+    name + "size_" + str(len(train[1])) + "_stage_" + str(stage - 1) + "_set_ckpt.pth"))
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/serialization.py", line 525, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/serialization.py", line 212, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/s1572869/miniconda3/envs/mlp/lib/python3.7/site-packages/torch/serialization.py", line 193, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '/home/s1572869/MSc_results/models/cifar100/im_wclsize_1000_stage_2_set_ckpt.pth'
